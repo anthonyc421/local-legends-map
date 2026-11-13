@@ -1,0 +1,12 @@
+{
+  "name": "local-legends-map",
+  "private": true,
+  "description": "The Local Legends Map (LocalLegendsMap.com) - static site source and published build",
+  "scripts": {
+    "build": "node build.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "sharp": "^0.35.4"
+  }
+}

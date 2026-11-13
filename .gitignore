@@ -1,0 +1,4 @@
+node_modules/
+.prerender/
+test-out/
+.DS_Store
