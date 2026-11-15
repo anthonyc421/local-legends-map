@@ -1912,7 +1912,8 @@ const REGIONS = [
  {id:"albany",label:"Lil Nippers",name:"Albany & the Capital Region",lat:42.7,lon:-73.78,rx:22,ry:16,
   towns:["Albany","Troy","Schenectady","Watervliet","Cohoes","Colonie","Latham","Rensselaer","Delmar"],
   dishes:[{n:"Mozzarella Sticks with Raspberry Sauce",d:"Capital Region bars serve their mozzarella sticks with sweet raspberry sauce for dipping. Marinara is available if you insist.",s:[]},
-          {n:"Mini Hot Dogs (Lil Nippers)",d:"Little hot dogs with meat sauce, onions and mustard that locals call lil nippers. Grab a hairy arm of lil nippers and order them by the handful.",s:["Famous Lunch (Troy)","Gus's Hot Dogs (Watervliet)"]}]},
+          {n:"Mini Hot Dogs (Lil Nippers)",d:"Little hot dogs with meat sauce, onions and mustard that locals call lil nippers. Grab a hairy arm of lil nippers and order them by the handful.",s:["Famous Lunch (Troy)","Gus's Hot Dogs (Watervliet)"]},
+          {n:"Schenectady Tomato Pie",d:"Schenectady's own take on tomato pie: a bread-like crust topped with tomato sauce and grated cheese. Perreca's Bakery, run by the same family for more than 100 years in Schenectady's Little Italy, bakes it in a coal-fired brick oven alongside its famous crusty Italian bread. It's a close cousin of Utica's tomato pie, and both cities will tell you theirs is the one.",s:["Perreca's Bakery (Schenectady)"]}]},
  {id:"hudson",label:"CIA",name:"Mid-Hudson Valley",lat:41.8,lon:-73.93,rx:26,ry:22,
   towns:["Hyde Park","Poughkeepsie","Rhinebeck","Kingston","Hudson","New Paltz","Beacon","Newburgh"],
   dishes:[{n:"Culinary Institute of America",d:"The CIA's Hyde Park campus runs restaurants staffed by students and open to the public. Book ahead.",s:["The CIA, Hyde Park"]},
@@ -2184,8 +2185,9 @@ const NEWS=[
   src:"Buffalo Toronto Public Media",url:"https://www.btpm.org/local/2026-08-27/national-buffalo-chicken-wing-festival-honoring-legends-to-celebrate-25-years"},
  {type:"Local Legends Map",region:"northcountry",date:"Oct 2026",head:"Sergi's pizza roll joins the Pizza Trail",sum:"The North Country's late-night legend in Potsdam is now stop 6 on the statewide Pizza Crawl.",href:"#t-pizza"},
  {type:"Local Legends Map",region:"albany",date:"Oct 2026",head:"Lil nippers get their own page",sum:"The Capital Region's mini hot dogs, and where to grab a hairy arm of them.",href:"#d-albany-1"},
+ {type:"Local Legends Map",region:"albany",date:"Nov 2026",head:"Schenectady tomato pie joins the map",sum:"Perreca's Bakery has baked it in a coal-fired brick oven for more than a century. Utica, you have company.",href:"#d-albany-2"},
  {type:"Local Legends Map",region:"oneonta",date:"Nov 2026",head:"Oneonta's cold cheese slice is on the map",sum:"A hot slice under a heap of cold mozzarella, made famous at Tino's Pizza. It's now style #11 in the Pizza Styles of New York.",href:"#d-oneonta-1"},
- {type:"Local Legends Map",region:null,date:"Oct 2026",head:"New field guide: The Pizza Styles of New York State",sum:"Eight pies and three cousins, from the folded New York slice to Utica's upside-down pizza, with the places locals send you.",href:"#pizza-ny"},
+ {type:"Local Legends Map",region:null,date:"Oct 2026",head:"New field guide: The Pizza Styles of New York State",sum:"Eight pies and four cousins, from the folded New York slice to Utica's upside-down pizza, with the places locals send you.",href:"#pizza-ny"},
  {type:"Local Legends Map",region:null,date:"Oct 2026",head:"New field guide: The Hot Dogs of New York State",sum:"Nine dogs, nine answers, from Rochester red and white hots to the Coney made famous by Nathan's.",href:"#f-hotdogs"},
  {type:"Events",region:"binghamton",date:"Every August",head:"Spiedie Fest brings the grills to Binghamton every August",sum:"Marinated, grilled and pulled off the skewer with Italian bread.",href:"#d-binghamton-0"}
 ];
@@ -3630,7 +3632,10 @@ const STYLES=[
   order:"Order a calzone and ask the locals which shops still make it open-face.",art:{shape:"half",cheese:1}},
  {id:"ny-coldcheese",cat:"pizza",st:"ny",rid:"oneonta",home:"Oneonta",n:"Cold Cheese Slice",group:"pie",dish:["oneonta","Cold Cheese Slice"],
   crust:"A standard pizzeria slice",sauce:"Red sauce",cheese:"Melted mozzarella, then a heap of cold shredded mozzarella on top",
-  order:"Ask for \"a cold cheese\" at Tino's, late at night, the way the college crowd does.",art:{shape:"round",cheese:1,shreds:1,cuts:8}}
+  order:"Ask for \"a cold cheese\" at Tino's, late at night, the way the college crowd does.",art:{shape:"round",cheese:1,shreds:1,cuts:8}},
+ {id:"ny-schenectadytomatopie",cat:"pizza",st:"ny",rid:"albany",home:"Schenectady",n:"Schenectady Tomato Pie",group:"cousin",dish:["albany","Schenectady Tomato Pie"],
+  crust:"Bread-like, from a coal-fired brick oven",sauce:"Tomato sauce",cheese:"Grated cheese",
+  order:"Grab tomato pie and a loaf of the bread at Perreca's Bakery.",art:{shape:"sheet",cheese:0,romano:1,cuts:4}}
 ];
 /* pizza styles other states are known for: not on the map yet, shown on the national hub as "next up" */
 const STYLES_NEXT=[["Detroit-Style","Michigan"],["Chicago Deep Dish","Illinois"],["Chicago Tavern-Style","Illinois"],["New Haven Apizza","Connecticut"],["Trenton Tomato Pie","New Jersey"],["Old Forge Pizza","Pennsylvania"],["St. Louis-Style","Missouri"],["Ohio Valley Pizza","Ohio & West Virginia"],["Quad Cities Pizza","Iowa & Illinois"]];

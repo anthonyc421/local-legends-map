@@ -1,9 +1,9 @@
 {
-  "pages": 213,
-  "routesVisited": 213,
-  "srcBytes": 875397,
-  "homeHtmlBytes": 40439,
-  "jsBytes": 306714,
+  "pages": 214,
+  "routesVisited": 214,
+  "srcBytes": 876463,
+  "homeHtmlBytes": 40819,
+  "jsBytes": 307845,
   "cssBytes": 142791,
   "brand": {
     "logo": true,
@@ -24,6 +24,7 @@
     "/ny/capital-region/albany/lil-nippers/",
     "/events/albany-chefs-food-and-wine-festival/",
     "/events/saratoga-chowderfest/",
+    "/ny/capital-region/albany/schenectady-tomato-pie/",
     "/ny/mohawk-valley/oneonta-otsego/cold-cheese-slice/",
     "/pizza/new-york/",
     "/features/hot-dogs-of-new-york/",
