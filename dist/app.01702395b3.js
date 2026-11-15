@@ -1619,11 +1619,11 @@ PAGES_EXTRA.event=id=>{const e=EVENTS.find(x=>x.id===id&&!x.sample);if(!e)return
   const when=e.annual?e.annual:evDate(e)+(e.start.slice(0,4)!==String(new Date().getFullYear())?", "+e.start.slice(0,4):", "+e.start.slice(0,4));
   const a=answerText([`${e.name} ${e.annual?"happens "+e.annual.toLowerCase():"runs "+evDate(e)+", "+e.start.slice(0,4)} in ${e.town}${e.time?", "+e.time:""}.`,e.d,e.org?`It's hosted by ${e.org}.`:"",
     e.statewide?"It happens statewide, all across New York.":`It's in ${r.name}, known for ${listJoin(r.dishes.slice(0,3).map(d=>d.n))}.`,"Check the organizer's site before you go; details can change."]);
-  const facts=quickFacts([["Event",esc(e.name)],["When",esc(when)],["Where",esc(e.town)],["Time",esc(e.time||"")],["Type",esc(e.type)],["Hosted by",esc(e.org||"")],["Region",`<a href="#r-${r.id}">${esc(r.name)}</a>`],["Source",esc(e.src||"")],
+  const facts=quickFacts([["Event",esc(e.name)],["When",esc(when)],["Where",esc(e.town)],["Time",esc(e.time||"")],["Type",esc(e.type)],["Hosted by",esc(e.org||"")],["Region",e.statewide?`<a href="#ny">Statewide (all of New York)</a>`:`<a href="#r-${r.id}">${esc(r.name)}</a>`],["Source",esc(e.src||"")],
     ["The food",e.dish?`<a href="${dishHref(e.dish[0],e.dish[1])}">${esc(R(e.dish[0]).dishes[e.dish[1]].n)}</a>`:""]]);
   const qa=qaBlock([[`When is ${e.name}?`,e.annual?`${e.annual}. ${/announced/.test(e.d)?"Next year's dates are to be announced.":""}`.trim():`${evDate(e)}, ${e.start.slice(0,4)}${e.time?", "+e.time:""}.`],
-    [`Where is ${e.name}?`,`${e.town}, in ${r.name}.`],e.org?["Who runs it?",e.org+"."]:null,
-    [`What should I eat while I'm in ${r.name.split(" & ")[0]}?`,`Locals would point you to ${listJoin(r.dishes.slice(0,3).map(d=>d.n))}.`]]);
+    [`Where is ${e.name}?`,e.statewide?`${e.town}.`:`${e.town}, in ${r.name}.`],e.org?["Who runs it?",e.org+"."]:null,
+    e.statewide?null:[`What should I eat while I'm in ${r.name.split(" & ")[0]}?`,`Locals would point you to ${listJoin(r.dishes.slice(0,3).map(d=>d.n))}.`]]);
   const ld=e.annual?"":ldTag({"@context":"https://schema.org","@type":"Event",name:e.name,startDate:e.start,endDate:e.end,eventStatus:"https://schema.org/EventScheduled",eventAttendanceMode:"https://schema.org/OfflineEventAttendanceMode",
     description:e.d,location:{"@type":"Place",name:e.town,address:{"@type":"PostalAddress",addressLocality:e.town.replace(/\s*\(.*\)/,""),addressRegion:"NY",addressCountry:"US"}},...(e.org?{organizer:{"@type":"Organization",name:e.org}}:{})});
   return {path:evPath(e),title:e.name,html:`
@@ -1632,7 +1632,7 @@ PAGES_EXTRA.event=id=>{const e=EVENTS.find(x=>x.id===id&&!x.sample);if(!e)return
   <div class="split"><div class="mapbox" id="mapslot"></div><div>${facts}</div></div>
   ${qa}${ld}${shareBox({title:e.name,sub:`${e.annual||evDate(e)} · ${e.town.replace(/\s*\(.*\)/,"")}`,kind:"Event",path:evPath(e),cover:true,paid:!!e.promo})}
   <section class="band"><div class="sec-head"><h2>More food events</h2><a href="#events">Full calendar →</a></div><div class="nlist three">${EVENTS.filter(x=>x.id!==e.id&&!x.sample).slice(0,3).map(evCard).join("")}</div></section>`,
-  after(){const [x,y]=P(r.lat,r.lon);const w=380,h=w*540/690;$("#mapslot").appendChild(nyMap({active:[r.id],zoom:[x-w/2,y-h/2,w,h]}));}};};
+  after(){if(e.statewide){$("#mapslot").appendChild(nyMap({active:REGIONS.map(x=>x.id)}));return;}const [x,y]=P(r.lat,r.lon);const w=380,h=w*540/690;$("#mapslot").appendChild(nyMap({active:[r.id],zoom:[x-w/2,y-h/2,w,h]}));}};};
 
 /* ---------- This weekend ---------- */
 function weekendEvents(rid){const a=isoDay(0),b=isoDay(7);
