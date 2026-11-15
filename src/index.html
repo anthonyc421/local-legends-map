@@ -1879,7 +1879,8 @@ const REGIONS = [
   dishes:[{n:"Spiedies",d:"Marinated cubes of chicken, pork or lamb grilled on a skewer and pulled off with a slice of Italian bread. Spiedie Fest happens every August.",s:["Lupo's S&S Char Pit"]}]},
  {id:"oneonta",label:"Brooks",name:"Oneonta & Otsego",lat:42.45,lon:-75.0,rx:24,ry:16,
   towns:["Oneonta","Cooperstown","Delhi","Sidney","Stamford","Walton"],
-  dishes:[{n:"Brooks Chicken BBQ",d:"Chicken barbecued over long open pits, family-run in Oneonta for generations. Grab a bottle of the sauce to take home.",s:["Brooks' House of Bar-B-Q"]}]},
+  dishes:[{n:"Brooks Chicken BBQ",d:"Chicken barbecued over long open pits, family-run in Oneonta for generations. Grab a bottle of the sauce to take home.",s:["Brooks' House of Bar-B-Q"]},
+          {n:"Cold Cheese Slice",d:"Oneonta's late-night legend: a hot cheese slice buried under a big handful of cold, shredded mozzarella, added right before it's served. Tino's Pizza on Main Street made it famous in the 1980s, feeding bar-hopping students from SUNY Oneonta and Hartwick College. The story locals tell is that the cold cheese kept people from burning their mouths on slices fresh out of the oven. Ask for \"a cold cheese\" and you'll get one.",s:["Tino's Pizza (Oneonta)"]}]},
  {id:"chenango",label:"Yogurt",name:"Chenango Valley",lat:42.56,lon:-75.6,rx:20,ry:14,
   towns:["New Berlin","Norwich","Sherburne","Hamilton","Greene"],
   dishes:[{n:"Greek Yogurt",d:"Chobani's plant in New Berlin helped make New York the country's top yogurt-producing state.",s:[]}]},
@@ -2183,7 +2184,8 @@ const NEWS=[
   src:"Buffalo Toronto Public Media",url:"https://www.btpm.org/local/2026-08-27/national-buffalo-chicken-wing-festival-honoring-legends-to-celebrate-25-years"},
  {type:"Local Legends Map",region:"northcountry",date:"Oct 2026",head:"Sergi's pizza roll joins the Pizza Trail",sum:"The North Country's late-night legend in Potsdam is now stop 6 on the statewide Pizza Crawl.",href:"#t-pizza"},
  {type:"Local Legends Map",region:"albany",date:"Oct 2026",head:"Lil nippers get their own page",sum:"The Capital Region's mini hot dogs, and where to grab a hairy arm of them.",href:"#d-albany-1"},
- {type:"Local Legends Map",region:null,date:"Oct 2026",head:"New field guide: The Pizza Styles of New York State",sum:"Seven pies and three cousins, from the folded New York slice to Utica's upside-down pizza, with the places locals send you.",href:"#pizza-ny"},
+ {type:"Local Legends Map",region:"oneonta",date:"Nov 2026",head:"Oneonta's cold cheese slice is on the map",sum:"A hot slice under a heap of cold mozzarella, made famous at Tino's Pizza. It's now style #11 in the Pizza Styles of New York.",href:"#d-oneonta-1"},
+ {type:"Local Legends Map",region:null,date:"Oct 2026",head:"New field guide: The Pizza Styles of New York State",sum:"Eight pies and three cousins, from the folded New York slice to Utica's upside-down pizza, with the places locals send you.",href:"#pizza-ny"},
  {type:"Local Legends Map",region:null,date:"Oct 2026",head:"New field guide: The Hot Dogs of New York State",sum:"Nine dogs, nine answers, from Rochester red and white hots to the Coney made famous by Nathan's.",href:"#f-hotdogs"},
  {type:"Events",region:"binghamton",date:"Every August",head:"Spiedie Fest brings the grills to Binghamton every August",sum:"Marinated, grilled and pulled off the skewer with Italian bread.",href:"#d-binghamton-0"}
 ];
@@ -3625,7 +3627,10 @@ const STYLES=[
   order:"A Sergi's Pizza Roll in Potsdam, late at night.",art:{shape:"roll"}},
  {id:"ny-opencalzone",cat:"pizza",st:"ny",rid:"corning",home:"Corning & Elmira",n:"Open-Face Calzone",group:"cousin",dish:["corning","Calzone Served Open-Face"],
   crust:"Calzone dough, served open instead of folded shut",
-  order:"Order a calzone and ask the locals which shops still make it open-face.",art:{shape:"half",cheese:1}}
+  order:"Order a calzone and ask the locals which shops still make it open-face.",art:{shape:"half",cheese:1}},
+ {id:"ny-coldcheese",cat:"pizza",st:"ny",rid:"oneonta",home:"Oneonta",n:"Cold Cheese Slice",group:"pie",dish:["oneonta","Cold Cheese Slice"],
+  crust:"A standard pizzeria slice",sauce:"Red sauce",cheese:"Melted mozzarella, then a heap of cold shredded mozzarella on top",
+  order:"Ask for \"a cold cheese\" at Tino's, late at night, the way the college crowd does.",art:{shape:"round",cheese:1,shreds:1,cuts:8}}
 ];
 /* pizza styles other states are known for: not on the map yet, shown on the national hub as "next up" */
 const STYLES_NEXT=[["Detroit-Style","Michigan"],["Chicago Deep Dish","Illinois"],["Chicago Tavern-Style","Illinois"],["New Haven Apizza","Connecticut"],["Trenton Tomato Pie","New Jersey"],["Old Forge Pizza","Pennsylvania"],["St. Louis-Style","Missouri"],["Ohio Valley Pizza","Ohio & West Virginia"],["Quad Cities Pizza","Iowa & Illinois"]];
@@ -3644,6 +3649,7 @@ function pizzaSVG(o){const ink="var(--ink)",crust="#E2B572",crustD="#C98F45",sau
     s+=`<circle cx="${cx}" cy="${cy}" r="${ri}" fill="${o.cheese?cheese:sauce}"/>`;
     if(o.mozz)s+=dots([[48,33],[70,36],[56,52],[75,55],[44,56],[62,28]],5.5,mozz);
     if(o.romano)s+=dots([[46,34],[58,30],[71,38],[52,47],[66,50],[77,46],[48,58],[60,62],[72,60],[40,46]],1.6,romano);
+    if(o.shreds)s+=[[44,32,20],[56,28,-30],[68,34,60],[50,42,-10],[62,44,35],[74,46,-50],[42,52,70],[54,56,10],[66,58,-25],[78,56,40],[48,64,-60],[60,66,15],[36,42,-35],[84,40,25]].map(([x,y,a])=>`<rect x="${x-5}" y="${y-1.3}" width="10" height="2.6" rx="1.3" fill="#FFFDF5" stroke="#E8D9A8" stroke-width=".5" transform="rotate(${a} ${x} ${y})"/>`).join("");
     if(o.cups)s+=[[47,34],[67,32],[57,47],[75,50],[45,55],[63,62]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="#B13A26" stroke="#7E2416" stroke-width="1.4"/><circle cx="${x}" cy="${y}" r="2.3" fill="#7E2416"/>`).join("");
     if(o.char){for(let k=0;k<10;k++){const a=k*Math.PI/5+.3,rr=R0-1.8;s+=`<circle cx="${(cx+rr*Math.cos(a)).toFixed(1)}" cy="${(cy+rr*Math.sin(a)).toFixed(1)}" r="1.8" fill="#4A2A14"/>`;}}
     for(let k=0;k<(o.cuts||0)/2;k++){const a=k*Math.PI/((o.cuts||2)/2);s+=`<line x1="${(cx+R0*Math.cos(a)).toFixed(1)}" y1="${(cy+R0*Math.sin(a)).toFixed(1)}" x2="${(cx-R0*Math.cos(a)).toFixed(1)}" y2="${(cy-R0*Math.sin(a)).toFixed(1)}" stroke="${crustD}" stroke-width="1.2" opacity=".85"/>`;}}
