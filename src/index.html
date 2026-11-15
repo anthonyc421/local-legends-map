@@ -3048,6 +3048,7 @@ const NKIND={food:"Regional food",place:"Place to get it",fight:"Food fight"};
 const NSTAT={open:"Collecting votes",desk:"On the editor's desk",added:"Added to the map",no:"Not this time",settled:"Settled"};
 const NOMS=[
  {id:"f1",kind:"fight",n:"Who makes the best riggies?",region:"utica",dish:["utica",0],why:"Utica says riggies are theirs. Rome says they make them better. It's been going on for years, so settle it.",sides:[{t:"Utica",v:41},{t:"Rome",v:33}],status:"open",by:"sample member"},
+ {id:"f3",kind:"fight",n:"Tomato pie: Utica or Schenectady?",region:"albany",dish:["albany",2],also:[["utica",2]],links:["Schenectady tomato pie","Utica tomato pie"],why:"Two cities, one pie: a bread-like crust, tomato sauce and grated cheese. Utica sells it from its bakeries. Schenectady has Perreca's coal-fired brick oven. Who does it better? And who did it first? If you know the history, bring your proof.",sides:[{t:"Utica",v:0},{t:"Schenectady",v:0}],status:"open",by:"Local Legends Map"},
  {id:"f2",kind:"fight",n:"Michigans: onions under the sauce, or on top?",region:"plattsburgh",dish:["plattsburgh",0],why:"Order one \"buried\" and the onions go under the meat sauce. Some say that's the only right way.",sides:[{t:"Buried (under)",v:27},{t:"On top",v:22}],status:"open",by:"sample member"},
  {id:"n2",kind:"food",n:"Loganberry drink",region:"buffalo",why:"The purple fountain drink Western New Yorkers grew up on at hot dog stands and summer picnics.",v:24,down:2,local:17,days:41,status:"open",by:"sample member"},
  {id:"n3",kind:"food",n:"Cornell Chicken BBQ",region:"fingerlakes",why:"The vinegar-and-egg chicken marinade from Cornell, sold at every firehouse fundraiser and the State Fair.",v:21,down:9,ff:6,claims:[{t:"It's from all over New York",c:4},{t:"Syracuse & Central NY",c:2}],local:9,days:52,status:"open",by:"sample member"},
@@ -3062,13 +3063,14 @@ const net=n=>(n.v||0)-(n.down||0);
 const isFight=n=>n.kind==="fight"||(n.ff||0)>=THRESH.fight||((n.v+(n.down||0))>=12&&(n.down||0)/(n.v+(n.down||0))>=.35);
 const sampleTag=n=>n.by==="sample member"||n.by==="example"?`<span class="pbadge p-mem">${n.by==="example"?"example":"sample"}</span>`:"";
 const FIGHT_PILL=`<span class="nstat st-fight">🔥 Food fight</span>`;
-function tug(n){const tot=n.sides.reduce((a,s)=>a+s.v,0)||1,p=Math.round(n.sides[0].v/tot*100);
+function tug(n){const raw=n.sides.reduce((a,s)=>a+s.v,0);if(!raw)return `<div class="tug" role="img" aria-label="No votes yet"><span class="ta" style="width:50%;opacity:.35"></span><span class="tb" style="width:50%;opacity:.35"></span></div><div class="tugl"><span>${esc(n.sides[0].t)}</span><span class="muted">No votes yet</span><span>${esc(n.sides[1].t)}</span></div>`;
+  const tot=raw,p=Math.round(n.sides[0].v/tot*100);
   return `<div class="tug" role="img" aria-label="${esc(n.sides[0].t)} ${p}%, ${esc(n.sides[1].t)} ${100-p}%"><span class="ta" style="width:${p}%"></span><span class="tb" style="width:${100-p}%"></span></div>
   <div class="tugl"><span><b>${p}%</b> ${esc(n.sides[0].t)}</span><span>${esc(n.sides[1].t)} <b>${100-p}%</b></span></div>`;}
 function fightCard(n){const r=R(n.region),d=n.dish&&R(n.dish[0]).dishes[n.dish[1]],tot=n.sides.reduce((a,s)=>a+s.v,0);
-  return `<article class="nomcard fightcard s-${n.status}"><div class="nmeta">${n.status==="settled"?`<span class="nstat st-added">Settled</span>`:FIGHT_PILL}${d?`<a href="${dishHref(n.dish[0],n.dish[1])}">About ${esc(d.n)}</a>`:""}<a href="#r-${r.id}">${esc(r.name)}</a>${sampleTag(n)}</div>
+  return `<article class="nomcard fightcard s-${n.status}"><div class="nmeta">${n.status==="settled"?`<span class="nstat st-added">Settled</span>`:FIGHT_PILL}${n.also?[n.dish,...n.also].map((x,k)=>`<a href="${dishHref(x[0],x[1])}">${esc((n.links||[])[k]||R(x[0]).dishes[x[1]].n)}</a>`).join(""):d?`<a href="${dishHref(n.dish[0],n.dish[1])}">About ${esc(d.n)}</a>`:""}${n.also?"":`<a href="#r-${r.id}">${esc(r.name)}</a>`}${sampleTag(n)}</div>
     <h3>${esc(n.n)}</h3><p>${esc(n.why)}</p>${tug(n)}
-    <div class="crow">${n.status==="settled"?`<span class="muted">The editor called it: <b>${esc(n.winner)}</b>.</span>`:n.sides.map((s,i)=>`<button class="vbar side ${n.my===i?"on":""}" type="button" data-side="${n.id}:${i}" aria-pressed="${n.my===i}">Team ${esc(s.t)} <b>${s.v}</b></button>`).join("")+`<span class="muted">${tot} members picked a side</span>`}</div></article>`;}
+    <div class="crow">${n.status==="settled"?`<span class="muted">The editor called it: <b>${esc(n.winner)}</b>.</span>`:n.sides.map((s,i)=>`<button class="vbar side ${n.my===i?"on":""}" type="button" data-side="${n.id}:${i}" aria-pressed="${n.my===i}">Team ${esc(s.t)} <b>${s.v}</b></button>`).join("")+`<span class="muted">${tot?`${tot} members picked a side`:"Be the first to pick a side"}</span>`}</div></article>`;}
 function nomCard(n){if(n.kind==="fight")return fightCard(n);
   const r=R(n.region),t=need(n),nv=net(n),pct=Math.max(0,Math.min(100,Math.round(nv/t*100))),fight=isFight(n);
   const where=n.kind==="place"?`for ${esc(n.forDish||"a regional food")} · ${esc(r.name)}`:esc(r.name);
@@ -3151,7 +3153,7 @@ PAGES_EXTRA.vote=()=>({path:"/up-for-a-vote/",title:"Up for a Vote",html:`
       NOMS.unshift({id:"u"+Date.now(),kind:form.kind.value,n,forDish:form.forDish.value.trim(),region:form.region.value,why,v:0,down:0,local:0,days:THRESH.days,status:"open",by:"you"});
       form.reset();form.querySelector(".nfor").hidden=true;nomFilter="all";document.querySelectorAll("#nomchips .chip").forEach(c=>c.classList.toggle("on",c.dataset.f==="all"));draw();
       thankContributor(n,R(NOMS[0].region).name);});}});
-function dishFight(rid,i){const f=NOMS.find(n=>n.kind==="fight"&&n.dish&&n.dish[0]===rid&&n.dish[1]===+i);if(!f)return "";
+function dishFight(rid,i){const f=NOMS.find(n=>n.kind==="fight"&&[n.dish,...(n.also||[])].some(x=>x&&x[0]===rid&&x[1]===+i));if(!f)return "";
   return `<section class="band"><div class="sec-head"><h2>🔥 Food fight</h2><a href="#vote">All food fights →</a></div><div class="nomlist" data-board>${fightCard(f)}</div></section>`;}
 
 PAGES_EXTRA.desk=()=>({path:"/admin/review/",title:"Editor's desk",html:`
