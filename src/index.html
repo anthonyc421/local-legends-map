@@ -1791,6 +1791,11 @@ html[data-season="winter"] .seasonstrip{background:var(--hero-winter)}html[data-
 .fstates{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;border-top:1px solid rgba(255,255,255,.25);padding-top:14px}
 .fstates b{width:100%}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .soonpage{background:var(--card)}:root:not([data-theme="light"]) .soonlead{color:var(--ink)}:root:not([data-theme="light"]) .soonnote{color:var(--text-2)}}
+
+/* About / money / privacy pages */
+.prosepage p,.prosepage li{max-width:68ch;font-size:17px;line-height:1.6}
+.prosepage ol,.prosepage ul:not(.why){padding-left:1.3em;display:grid;gap:6px}
+footer.site .fine a{display:inline!important;color:inherit;text-decoration:underline;padding:0;margin:0}
 </style>
 
 <div class="ticker" id="ticker" role="region" aria-label="Regional food news"></div>
@@ -1821,7 +1826,7 @@ html[data-season="winter"] .seasonstrip{background:var(--hero-winter)}html[data-
     <div><b>Plan</b><a href="#plan">Plan a trip</a><a href="#season-fall">Fall food trips</a><a href="#events">Events calendar</a><a href="#f-hotdogs">Hot Dogs of New York</a><a href="#pizza-ny">Pizza styles of New York</a><a href="#f-factories">Factory tours</a><a href="#news">News</a><a href="#vote">Up for a Vote</a></div>
     <div><b>For organizers &amp; businesses</b><a href="#organizers">Organizer hub</a><a href="#sponsors">Businesses &amp; sponsors</a><a href="#list">Get on the Trail</a><a href="#programs">Trail programs</a><a href="#desk">Editor's desk (admin preview)</a></div>
     <nav class="fstates" aria-label="All states"><b>All states</b><a href="#s-al">Alabama</a><a href="#s-ak">Alaska</a><a href="#s-az">Arizona</a><a href="#s-ar">Arkansas</a><a href="#s-ca">California</a><a href="#s-co">Colorado</a><a href="#s-ct">Connecticut</a><a href="#s-de">Delaware</a><a href="#s-fl">Florida</a><a href="#s-ga">Georgia</a><a href="#s-hi">Hawaii</a><a href="#s-id">Idaho</a><a href="#s-il">Illinois</a><a href="#s-in">Indiana</a><a href="#s-ia">Iowa</a><a href="#s-ks">Kansas</a><a href="#s-ky">Kentucky</a><a href="#s-la">Louisiana</a><a href="#s-me">Maine</a><a href="#s-md">Maryland</a><a href="#s-ma">Massachusetts</a><a href="#s-mi">Michigan</a><a href="#s-mn">Minnesota</a><a href="#s-ms">Mississippi</a><a href="#s-mo">Missouri</a><a href="#s-mt">Montana</a><a href="#s-ne">Nebraska</a><a href="#s-nv">Nevada</a><a href="#s-nh">New Hampshire</a><a href="#s-nj">New Jersey</a><a href="#s-nm">New Mexico</a><a href="#ny">New York</a><a href="#s-nc">North Carolina</a><a href="#s-nd">North Dakota</a><a href="#s-oh">Ohio</a><a href="#s-ok">Oklahoma</a><a href="#s-or">Oregon</a><a href="#s-pa">Pennsylvania</a><a href="#s-ri">Rhode Island</a><a href="#s-sc">South Carolina</a><a href="#s-sd">South Dakota</a><a href="#s-tn">Tennessee</a><a href="#s-tx">Texas</a><a href="#s-ut">Utah</a><a href="#s-vt">Vermont</a><a href="#s-va">Virginia</a><a href="#s-wa">Washington</a><a href="#s-wv">West Virginia</a><a href="#s-wi">Wisconsin</a><a href="#s-wy">Wyoming</a></nav>
-    <p class="fine">The Local Legends Map · LocalLegendsMap.com · Voted by locals. Paid placements are always labeled. Beta: browsing only; member features switch on in phase 2.</p>
+    <p class="fine"><a href="#about">About</a> · <a href="#how-we-make-money">How we make money</a> · <a href="#privacy">Privacy</a> · <a href="mailto:admin@jaboop.com">Contact</a><br>© 2026 Jaboop, Inc. · The Local Legends Map · Voted by locals. Paid placements are always labeled. Beta: browsing only; member features switch on in phase 2.</p>
   </footer>
 </div>
 <div id="toast" role="status" hidden></div>
@@ -3584,6 +3589,53 @@ PAGES_EXTRA.organizers=()=>{if(!CO4_CONFIG.features.organizerHub)return PAGES.no
   <section class="band rules"><span class="seclabel">The promise</span><h2>Earned vs. paid</h2><ul class="why"><li><b>Votes can't be bought.</b> Rankings, "Born Here" and "Local Gem" come from members.</li><li><b>Paid is always labeled</b> "Featured" or "Sponsored," and never shows a rank or score.</li><li><b>Money never changes a vote order.</b> Featured spots sit above the list; the list stays as voted.</li><li><b>Free stays free.</b> Posting an event or building a crawl costs nothing.</li></ul></section>`};};
 
 /* ---------- Businesses & sponsors ---------- */
+
+// === About / How we make money / Privacy (Nov 24, 2026) ===
+const SITE_CO={company:"Jaboop, Inc.",email:"admin@jaboop.com",affiliateLabel:"We may earn a small commission",updated:"November 24, 2026",nominate:"https://form.jotform.com/263068716224054",feedback:"https://form.jotform.com/262875227348063"};
+const mailLink=()=>`<a href="mailto:${SITE_CO.email}">${SITE_CO.email}</a>`;
+PAGES_EXTRA.about=()=>({path:"/about/",title:"About The Local Legends Map",html:`
+  ${crumbs([["Home","#home"],["About",""]])}
+  <div class="pagehead"><span class="eyebrow">About us</span><h1>Eat like you live there</h1>${answerBlock("What is The Local Legends Map?","A guide to the foods places are famous for: the dish a town argues about, the spot that made it famous, and the festival where everyone shows up hungry.")}</div>
+  <section class="band prosepage"><span class="seclabel">What we do</span><h2>Local legendary foods, not star ratings</h2>
+    <p>We aren't a review site or a restaurant directory, and we don't do star ratings. We map famous local foods, the places and celebrations behind them, and the spots that do them best. Every page answers three questions:</p>
+    <ol><li>What's the local legend?</li><li>Where did it come from?</li><li>Where do the locals go for it?</li></ol></section>
+  <section class="band prosepage"><span class="seclabel">How we check things</span><h2>Sourced, not made up</h2>
+    <ul><li>Every spot we list has at least two independent sources, or an official listing.</li>
+    <li>When a food's origin is disputed, we say so. We write "made famous at," not "invented at," unless the record is clear.</li>
+    <li>Vote counts come from real votes. We don't show made-up numbers.</li>
+    <li>If something's wrong, tell us and we'll fix it: <a href="${SITE_CO.feedback}" target="_blank" rel="noopener">send a correction</a>.</li></ul></section>
+  <section class="band prosepage"><span class="seclabel">Who's behind it</span><h2>Made in New York</h2>
+    <p>The Local Legends Map is run by ${esc(SITE_CO.company)} in New York. It started with New York's 15 food regions and is growing state by state.</p>
+    <p><b>Get in touch:</b> ${mailLink()} · <a href="${SITE_CO.nominate}" target="_blank" rel="noopener">Nominate a local legend</a> · <a href="#how-we-make-money">How we make money</a> · <a href="#privacy">Privacy</a></p></section>`});
+PAGES_EXTRA.money=()=>({path:"/how-we-make-money/",title:"How we make money",html:`
+  ${crumbs([["Home","#home"],["How we make money",""]])}
+  <div class="pagehead"><span class="eyebrow">Straight talk</span><h1>How we make money</h1>${answerBlock("Is The Local Legends Map free?","Yes. It's free to use, and it always will be. Here's how we pay the bills, in plain language.")}</div>
+  <section class="band prosepage"><span class="seclabel">1 · Labeled sponsorships</span><h2>Always marked Featured or Sponsored</h2>
+    <p>Tourism offices, festivals and local businesses can pay for a "Presented by" trail, a Featured Stop, a sponsored seasonal guide, a newsletter line or an event spotlight. Every one of these is labeled <b>Featured</b> or <b>Sponsored</b>.</p></section>
+  <section class="band prosepage"><span class="seclabel">2 · Affiliate links</span><h2>A small commission, never a higher price</h2>
+    <p>Some links, like a ship-it-home dish or a ticket, may earn us a small commission if you buy. You never pay more because of it. Links like these are marked "<b>${esc(SITE_CO.affiliateLabel)}</b>."</p></section>
+  <section class="band prosepage rules"><span class="seclabel">The promise</span><h2>What money can't buy</h2>
+    <ul class="why"><li>Votes, rankings, the "Born Here" badge and the "Local Gem" badge are earned. They're never sold.</li>
+    <li>Paid placements never show a rank or score.</li>
+    <li>Money never changes the vote order. Featured items sit above the list, and the list stays as voted.</li>
+    <li>Posting an event or building a crawl is free.</li>
+    <li>No outside ad networks. We don't sell your data, and we don't run third-party ad trackers.</li></ul>
+    <p>Questions? ${mailLink()} · <a href="#sponsors">Businesses &amp; sponsors</a></p></section>`});
+PAGES_EXTRA.privacy=()=>({path:"/privacy/",title:"Privacy policy",html:`
+  ${crumbs([["Home","#home"],["Privacy",""]])}
+  <div class="pagehead"><span class="eyebrow">Privacy policy</span><h1>Privacy</h1><p class="muted">Last updated: ${SITE_CO.updated}</p>${answerBlock("The short version","We collect very little. We don't sell anything about you. There are no ad trackers or analytics on this site.")}</div>
+  <section class="band prosepage"><span class="seclabel">On your device</span><h2>What your browser remembers</h2>
+    <ul><li>The state and region you picked, so the site opens there next time.</li><li>Your Food Passport check-offs.</li></ul>
+    <p>This is kept in your browser's local storage. It never comes to us. You can clear it any time by clearing your browser's site data. We don't set cookies.</p></section>
+  <section class="band prosepage"><span class="seclabel">Forms</span><h2>What you send us</h2>
+    <p>When you nominate a legend, submit an event or give feedback, the form is run by Jotform. We get what you type in, which may include your name and email if you add them. We use it only to review and reply to your submission. See <a href="https://www.jotform.com/privacy/" target="_blank" rel="noopener">Jotform's privacy policy</a>.</p></section>
+  <section class="band prosepage"><span class="seclabel">Hosting and fonts</span><h2>Services that deliver the site</h2>
+    <p>The site runs on Cloudflare. Like any web host, Cloudflare processes basic technical data, such as IP addresses, to deliver and protect the site. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare's privacy policy</a>. Our fonts load from Google Fonts, which also receives your IP address to send them. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's privacy policy</a>.</p></section>
+  <section class="band prosepage"><span class="seclabel">Everything else</span><h2>Links, kids and changes</h2>
+    <p><b>Links to other sites.</b> We link to restaurants, festivals and shops. Their privacy practices are their own.</p>
+    <p><b>Kids.</b> The site isn't aimed at children under 13, and we don't knowingly collect their information.</p>
+    <p><b>Changes.</b> If we add sign-in, email newsletters or analytics, we'll update this page first and change the date above.</p>
+    <p><b>Contact.</b> ${esc(SITE_CO.company)} · ${mailLink()}</p></section>`});
 PAGES_EXTRA.sponsors=()=>{if(!CO4_CONFIG.features.sponsorPage)return PAGES.notfound();const inq=CO4_CONFIG.forms.sponsorInquiry;
   const slots=[["Presented by","Your name on a trail or seasonal guide: \"Presented by\" at the top, a short line about you and a link.","[PRICE]"],
     ["Featured Stop","Top of the trail builder's options for your category and region. Visibility, not guaranteed inclusion: users still choose.","[PRICE]"],
@@ -3771,6 +3823,9 @@ function route(){
   else if(h==="plan") page=PAGES_EXTRA.plan();
   else if(h==="organizers") page=PAGES_EXTRA.organizers();
   else if(h==="sponsors") page=PAGES_EXTRA.sponsors();
+  else if(h==="about") page=PAGES_EXTRA.about();
+  else if(h==="how-we-make-money") page=PAGES_EXTRA.money();
+  else if(h==="privacy") page=PAGES_EXTRA.privacy();
   else page=PAGES.notfound();
   document.body.classList.toggle("is-home",h==="home");$("#app").innerHTML=page.html; $("#urlchip").textContent="locallegendsmap.com"+page.path;
   document.title=page.title==="HOME"?"The Local Legends Map":page.title+" · The Local Legends Map";

@@ -1,10 +1,10 @@
 {
-  "pages": 231,
-  "routesVisited": 231,
-  "srcBytes": 885310,
-  "homeHtmlBytes": 39381,
-  "jsBytes": 317719,
-  "cssBytes": 142791,
+  "pages": 234,
+  "routesVisited": 234,
+  "srcBytes": 892565,
+  "homeHtmlBytes": 39552,
+  "jsBytes": 324593,
+  "cssBytes": 143086,
   "brand": {
     "logo": true,
     "favicon": true
@@ -118,6 +118,9 @@
     "/organizers/",
     "/sponsors/",
     "/admin/review/",
+    "/about/",
+    "/how-we-make-money/",
+    "/privacy/",
     "/ny/chautauqua-allegheny/",
     "/ny/rochester-genesee/",
     "/ny/finger-lakes/",

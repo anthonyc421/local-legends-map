@@ -1785,3 +1785,8 @@ html[data-season="winter"] .seasonstrip{background:var(--hero-winter)}html[data-
 .fstates{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px 12px;font-size:13px;border-top:1px solid rgba(255,255,255,.25);padding-top:14px}
 .fstates b{width:100%}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .soonpage{background:var(--card)}:root:not([data-theme="light"]) .soonlead{color:var(--ink)}:root:not([data-theme="light"]) .soonnote{color:var(--text-2)}}
+
+/* About / money / privacy pages */
+.prosepage p,.prosepage li{max-width:68ch;font-size:17px;line-height:1.6}
+.prosepage ol,.prosepage ul:not(.why){padding-left:1.3em;display:grid;gap:6px}
+footer.site .fine a{display:inline!important;color:inherit;text-decoration:underline;padding:0;margin:0}
