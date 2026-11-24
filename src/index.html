@@ -1914,7 +1914,7 @@ const REGIONS = [
  {id:"cambridge",label:"Pie",name:"Washington County",lat:43.0,lon:-73.4,rx:16,ry:13,
   towns:["Cambridge","Greenwich","Salem","Hoosick Falls","Argyle"],
   dishes:[{n:"Pie à la Mode",d:"Cambridge claims the name was coined at the Cambridge Hotel in the 1890s when a diner asked for ice cream on his pie.",s:[]}]},
- {id:"albany",label:"Lil Nippers",name:"Albany & the Capital Region",lat:42.7,lon:-73.78,rx:22,ry:16,
+ {id:"albany",label:"Lil Nippers",name:"Albany & the Capital Region",alsoFrom:[["saratoga",0]],lat:42.7,lon:-73.78,rx:22,ry:16,
   towns:["Albany","Troy","Schenectady","Watervliet","Cohoes","Colonie","Latham","Rensselaer","Delmar"],
   dishes:[{n:"Mozzarella Sticks with Raspberry Sauce",d:"Capital Region bars serve their mozzarella sticks with sweet raspberry sauce for dipping. Marinara is available if you insist.",s:[]},
           {n:"Mini Hot Dogs (Lil Nippers)",d:"Little hot dogs with meat sauce, onions and mustard that locals call lil nippers. Grab a hairy arm of lil nippers and order them by the handful.",s:["Famous Lunch (Troy)","Gus's Hot Dogs (Watervliet)"]},
@@ -2740,7 +2740,7 @@ PAGES.region=rid=>{const r=R(rid); if(!r) return PAGES.notfound();
   ${areaCrumbs(rid)}
   ${areaHead(r)}
   <div class="split"><div class="mapbox" id="mapslot"></div>
-    <div class="dishlist">${r.dishes.map((d,i)=>`<a class="dcard big" href="${dishHref(rid,i)}"><span class="where">Regional delight</span><b>${esc(d.n)}</b><p>${esc(d.d)}</p>${d.s.length?`<span class="spotsline">Classic spots: ${d.s.map(esc).join(", ")}</span>`:""}<span class="more">Where to get it →</span></a>`).join("")}</div></div>
+    <div class="dishlist">${r.dishes.map((d,i)=>`<a class="dcard big" href="${dishHref(rid,i)}"><span class="where">Regional delight</span><b>${esc(d.n)}</b><p>${esc(d.d)}</p>${d.s.length?`<span class="spotsline">Classic spots: ${d.s.map(esc).join(", ")}</span>`:""}<span class="more">Where to get it →</span></a>`).join("")}${(r.alsoFrom||[]).map(([oid,oi])=>{const o=R(oid),d=o&&o.dishes[oi];return d?`<a class="dcard big" href="${dishHref(oid,oi)}"><span class="where">Also a Capital Region legend · ${esc(o.name)}</span><b>${esc(d.n)}</b><p>${esc(d.d)}</p>${d.s.length?`<span class="spotsline">Classic spots: ${d.s.map(esc).join(", ")}</span>`:""}<span class="more">Where to get it →</span></a>`:"";}).join("")}</div></div>
   ${EVENTS.some(e=>inRegion(e,rid)&&!e.sample)?`<section class="band"><div class="sec-head"><h2>Events in ${esc(r.name.split(" & ")[0])}</h2><a href="#events">Full calendar →</a></div><div class="nlist">${EVENTS.filter(e=>inRegion(e,rid)&&!e.sample).map(evCard).join("")}</div></section>`:""}
   <section class="band"><div class="sec-head"><h2>Trails through ${esc(r.name.split(" & ")[0])}</h2><a href="#trails">All trails →</a></div>
     ${trails.length?`<div class="tgrid">${trails.map(trailCard).join("")}</div>`:`<p class="muted">No trails here yet. <a href="#guide">Build the first one</a>.</p>`}</section>

@@ -1,9 +1,9 @@
 {
   "pages": 234,
   "routesVisited": 234,
-  "srcBytes": 892565,
+  "srcBytes": 892984,
   "homeHtmlBytes": 39552,
-  "jsBytes": 324593,
+  "jsBytes": 325012,
   "cssBytes": 143086,
   "brand": {
     "logo": true,
@@ -181,6 +181,7 @@
     "/ny/buffalo-niagara/stinger-sub/",
     "/ny/buffalo-niagara/stuffed-banana-peppers/",
     "/ny/buffalo-niagara/loganberry/",
+    "/ny/capital-region/saratoga-lake-george/saratoga-potato-chips/",
     "/events/new-york-state-craft-brewers-festival-albany/",
     "/ny/hudson-valley/apples-and-cider/",
     "/ny/new-york-city/bagels/",
@@ -203,7 +204,6 @@
     "/ny/capital-region/washington-county/pie-la-mode/",
     "/ny/central-new-york/ribbon-candy/",
     "/ny/central-new-york/salt-potatoes/",
-    "/ny/capital-region/saratoga-lake-george/saratoga-potato-chips/",
     "/ny/thousand-islands-seaway/watertown/sharp-cheddar/",
     "/ny/thousand-islands-seaway/thousand-islands/thousand-island-dressing/",
     "/ny/mohawk-valley/utica/utica-greens/",
